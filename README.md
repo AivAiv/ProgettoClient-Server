@@ -8,7 +8,9 @@ TODO:
 
 DA VEDERE: (* = interessante, £ = potenzialmente utile)
 - Lab 04: https://virtuale.unibo.it/pluginfile.php/1099524/mod_resource/content/2/Programmazione%20di%20Reti%20-%20%234.pdf
-- Lab 05: https://virtuale.unibo.it/pluginfile.php/1099526/mod_resource/content/2/Programmazione%20di%20Reti%20-%20%235_1.pdf
+- £Lab 05: https://virtuale.unibo.it/pluginfile.php/1099526/mod_resource/content/2/Programmazione%20di%20Reti%20-%20%235_1.pdf
 - *Lab 06: https://virtuale.unibo.it/pluginfile.php/1099529/mod_resource/content/2/Programmazione%20di%20Reti%20-%20%236.pdf
 - £Lab 11: https://virtuale.unibo.it/pluginfile.php/1220968/mod_resource/content/1/Programmazione%20di%20Reti%20%2311.pdf
 			+ 11bis
+
+- Video dell'indiano di turno: https://www.gyaanibuddy.com/assignments/assignment-detail/udp-file-transfer/
