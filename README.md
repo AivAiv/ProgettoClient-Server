@@ -13,4 +13,8 @@ DA VEDERE: (* = interessante, £ = potenzialmente utile)
 - £Lab 11: https://virtuale.unibo.it/pluginfile.php/1220968/mod_resource/content/1/Programmazione%20di%20Reti%20%2311.pdf
 			+ 11bis
 
-- Video dell'indiano di turno: https://www.gyaanibuddy.com/assignments/assignment-detail/udp-file-transfer/
+- Video dell'indiano di turno (in c): https://www.gyaanibuddy.com/assignments/assignment-detail/udp-file-transfer/
+- Codice simile: https://github.com/codyharrington/python-udp-filetransfer
+
+ALTRE NOTE:
+- Valutare l'utilizzo di thread per inviare/richiedere più file contemporaneamente.
