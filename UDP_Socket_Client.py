@@ -1,8 +1,5 @@
-
 '''
                         UDP CLIENT SOCKET
-Corso di Programmazione di Reti - Laboratorio - Università di Bologna
-G.Pau - A. Piroddi
 '''
 
 import socket as sk
