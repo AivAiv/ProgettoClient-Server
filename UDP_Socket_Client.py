@@ -5,12 +5,14 @@
 import socket as sk
 import time
 
+BUFFER_SIZE = 4096
 
 # Create il socket UDP
 sock = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
 
 server_address = ('localhost', 10000)
-message = 'Questo è il corso di ?'
+message = open("dog.jpeg", "rb")
+filename = "dog.jpeg"
 
 # LIST function
 def list():
@@ -35,7 +37,24 @@ try:
     # inviate il messaggio
     print ('sending "%s"' % message)
     time.sleep(2) #attende 2 secondi prima di inviare la richiesta
-    sent = sock.sendto(message.encode(), server_address)
+    #sent = sock.sendto(message, server_address)
+    
+    
+    sock.sendto('sending', server_address)    
+    with open(filename, "rb") as f:
+        while True:
+            # read the bytes from the file
+            bytes_read = f.read(BUFFER_SIZE)
+            if not bytes_read:
+                # file transmitting is done
+                break
+            # we use sendall to assure transimission in 
+            # busy networks
+            sock.sendto(bytes_read, server_address)
+            #print ('sending byte packet "%s"' % bytes_read)
+    sock.sendto('done', server_address) 
+
+
 
     # Ricevete la risposta dal server
     print('waiting to receive from')
