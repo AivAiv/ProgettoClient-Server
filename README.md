@@ -18,3 +18,5 @@ DA VEDERE: (* = interessante, £ = potenzialmente utile)
 
 ALTRE NOTE:
 - Valutare l'utilizzo di thread per inviare/richiedere più file contemporaneamente.
+
+COMMENTO ALE: I lab 4/5 non sono molto utili in quando non sono UDP e tutto il loro riassunto è nel lab 06. Il lab 11 ci può servire solo per qualche appunto su come si passano i messaggi un client e un server, ma nulla di più.
