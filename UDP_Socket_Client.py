@@ -40,7 +40,7 @@ try:
     #sent = sock.sendto(message, server_address)
     
     
-    sock.sendto('sending', server_address)    
+    sock.sendto('sending'.encode(), server_address)    
     with open(filename, "rb") as f:
         while True:
             # read the bytes from the file
@@ -52,7 +52,7 @@ try:
             # busy networks
             sock.sendto(bytes_read, server_address)
             #print ('sending byte packet "%s"' % bytes_read)
-    sock.sendto('done', server_address) 
+    sock.sendto('done'.encode(), server_address) 
 
 
 

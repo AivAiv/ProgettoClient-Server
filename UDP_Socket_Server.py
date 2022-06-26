@@ -4,6 +4,9 @@
 
 import socket as sk
 import time
+import os
+import io
+import PIL.Image as Image
 
 # Creiamo il socket
 sock = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
@@ -36,4 +39,9 @@ while True:
         time.sleep(2)
         sent = sock.sendto(data1.encode(), address)
         print ('sent %s bytes back to %s' % (sent, address))
+        
 
+        image = open(io.BytesIO(sentfile))
+        image.save(os.path.normpath('./Files'))
+        
+        break
