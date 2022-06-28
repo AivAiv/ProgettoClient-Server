@@ -3,7 +3,7 @@
 '''
 import os
 
-PATH = 'Server_Files/'
+PATH = 'Client_Files/'
 uno = 1
 due = 2
 
