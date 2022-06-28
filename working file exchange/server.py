@@ -10,6 +10,7 @@ sock = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
 
 sentfile = bytearray()
 marker = 'empty'
+nome = 'none'
 
 # associamo il socket alla porta
 server_address = ('localhost', 10000)
@@ -24,12 +25,15 @@ while True:
         print('Started sending')
     
     if marker.decode() == 'sending':
-        data, address = sock.recvfrom(4096)
-        if data == b'done':
-            marker = 'done'
+        if nome == 'none':
+           nome, address = sock.recvfrom(4096)
         else:
-            sentfile += data
-            #sentfile.append(data)
+            data, address = sock.recvfrom(4096)
+            if data == b'done':
+                marker = 'done'
+            else:
+                sentfile += data
+                #sentfile.append(data)
         
     if marker == 'done':
         print ('done receiving!')
@@ -40,7 +44,8 @@ while True:
         print ('sent %s bytes back to %s' % (sent, address))
         
         #saves the file
-        f = open('Files/dog.jpeg', 'ab')
+        print(nome.decode())
+        f = open('Files/' + nome.decode(), 'ab')
         f.write(sentfile)
         f.close()
         

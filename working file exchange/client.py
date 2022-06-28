@@ -11,8 +11,8 @@ BUFFER_SIZE = 4096
 sock = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
 
 server_address = ('localhost', 10000)
+filename = "Cartel1.xlsx"
 message = open("dog.jpeg", "rb")
-filename = "dog.jpeg"
 
 # LIST function
 def list():
@@ -40,7 +40,8 @@ try:
     #sent = sock.sendto(message, server_address)
     
     
-    sock.sendto('sending'.encode(), server_address)    
+    sock.sendto('sending'.encode(), server_address)
+    sock.sendto(filename.encode(), server_address)
     with open(filename, "rb") as f:
         while True:
             # read the bytes from the file
