@@ -3,48 +3,49 @@
 '''
 
 import socket as sk
-import time
+from Utilities import Input_Translator as it
 
-
-# Create il socket UDP
+# Creates UDP socket
 sock = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
-
 server_address = ('localhost', 10000)
-message = 'Questo è il corso di ?'
 
 # LIST function
-def list():
-    print ('list command!')
-    return 0
+def listfun():
+    print ('\nlist command!\n')
 
 # GET function
-def get(file):
-    print ('get command!')
-    return 1
+def getfun(file):
+    print ('\nget command!\n')
 
 # PUT function
-def put(file):
-    print ('put command!')
-    return 2
+def putfun(file):
+    print ('\nput command!\n')
 
-try:
-
-    print ('Commands list:\n- LIST\n- GET <filename>\n- PUT <filename>')
-    #command = input('Insert command: ')
+while True:
     
-    # inviate il messaggio
-    print ('sending "%s"' % message)
-    time.sleep(2) #attende 2 secondi prima di inviare la richiesta
-    sent = sock.sendto(message.encode(), server_address)
-
-    # Ricevete la risposta dal server
-    print('waiting to receive from')
-    data, server = sock.recvfrom(4096)
-    #print(server)
-    time.sleep(2)
-    print ('received message "%s"' % data.decode('utf8'))
-except Exception as info:
-    print(info)
-finally:
-    print ('closing socket')
-    sock.close()
+    print ('----------------------\nCommands list:       |')
+    print (' - LIST              |')
+    print (' - GET <filename>    |')
+    print (' - PUT <filename>    |')
+    text = input('----------------------\nInsert command: ')
+    
+    if it.checkInput(text):
+        filename, command = it.getInput(text)
+    
+    while it.checkInput(text) == False:
+        text = input('>>> Insert command: ')
+        if it.checkInput(text):
+            filename, command = it.getInput(text)
+    
+    if command == 'list':
+        listfun()
+    elif command == 'get':
+        getfun('a')
+    elif command == 'put':
+        putfun('a')
+    elif command == 'exit':
+        sock.sendto(text.encode(), server_address)
+        sock.close()
+        exit()
+    else:
+        print('yay')
