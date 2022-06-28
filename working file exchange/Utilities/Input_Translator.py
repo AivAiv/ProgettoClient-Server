@@ -3,7 +3,9 @@
 '''
 import os
 
-PATH = '../Server_Files/'
+PATH = 'Server_Files/'
+uno = 1
+due = 2
 
 # Retrieves the files from Files directory.
 def getFiles():
@@ -34,7 +36,7 @@ def checkInput(inString):
         # Checks if the command is valid.
         if not (command == 'put' or command == 'get' or command == 'list'):
             print('Invalid command')
-            return 1
+            return uno, uno
         
         # Checks if the file name is valid.
         found = False
@@ -48,5 +50,6 @@ def checkInput(inString):
         
         if not found:
             print('File not founded')
-            return 2
-        return 0
+            return due, due
+        
+        return fileName, command

@@ -4,6 +4,7 @@
 
 import socket as sk
 import time
+from Utilities import Input_Translator as it
 
 BUFFER_SIZE = 4096
 
@@ -16,8 +17,9 @@ message = open("Client_Files/dog.jpeg", "rb")
 
 # LIST function
 def lists():
-    print ('list command!')
-    return 0
+    print('Files list:')
+    for f in it.getFiles():
+        print(f)
 
 # GET function
 def gets(file):
@@ -31,10 +33,16 @@ def puts(file):
 
 try:
     print ('Commands list:\n- LIST\n- GET <filename>\n- PUT <filename>')
-    command = input('Insert command: ')
+    inp = input('Insert command: ')
+    
+    filename, command = it.checkInput(inp);
+    
+    while (filename == '1') or (filename == '2'):
+        print("not funny!")
+        filename, command = it.checkInput(inp);
     
     if command == 'list':
-        list()
+        lists()
     if command == 'get':
         gets('a')
     if command == 'put':
