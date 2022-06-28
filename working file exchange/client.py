@@ -15,24 +15,30 @@ filename = "Cartel1.xlsx"
 message = open("dog.jpeg", "rb")
 
 # LIST function
-def list():
+def lists():
     print ('list command!')
     return 0
 
 # GET function
-def get(file):
+def gets(file):
     print ('get command!')
     return 1
 
 # PUT function
-def put(file):
+def puts(file):
     print ('put command!')
     return 2
 
 try:
-
     print ('Commands list:\n- LIST\n- GET <filename>\n- PUT <filename>')
-    #command = input('Insert command: ')
+    command = input('Insert command: ')
+    
+    if command == 'list':
+        list()
+    if command == 'get':
+        gets('a')
+    if command == 'put':
+        puts('a')
     
     # inviate il messaggio
     print ('sending "%s"' % message)
