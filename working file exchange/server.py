@@ -45,7 +45,7 @@ while True:
         
         #saves the file
         print(nome.decode())
-        f = open('Files/' + nome.decode(), 'ab')
+        f = open('Server_Files/' + nome.decode(), 'ab')
         f.write(sentfile)
         f.close()
         

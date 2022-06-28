@@ -3,7 +3,7 @@
 '''
 import os
 
-PATH = '../Files/'
+PATH = '../Server_Files/'
 
 # Retrieves the files from Files directory.
 def getFiles():
