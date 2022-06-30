@@ -37,7 +37,7 @@ def checkInput(inString):
                     fileName += ' ' + x
         
         # Checks if the command is valid.
-        if not (command == 'put' or command == 'get' or command == 'list'):
+        if not (command == 'put' or command == 'get' or command == 'list' or command == 'exit'):
             print('[Unknown command]')
             return False
         
@@ -48,7 +48,7 @@ def checkInput(inString):
             if fileName == name:
                 found = True
             
-        if command == 'list':
+        if command == 'list' or command == 'exit':
             found = True
         
         if not found:
@@ -68,5 +68,3 @@ def getInput(inString):
             else:
                 fileName += ' ' + x
     return fileName, command
-
-

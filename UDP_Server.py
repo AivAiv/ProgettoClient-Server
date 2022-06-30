@@ -13,7 +13,7 @@ BUFFER_SIZE = 4096
 
 sock = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
 sock.bind(SERVER_ADDRESS)
-print('Server started and listening on IP: %s and PORT: %s\n' % SERVER_ADDRESS)
+print('Server started and listening on IP: %s and PORT: %s' % SERVER_ADDRESS)
 
 def client_handler(server_socket, client_addr, cmd):
     if cmd == "list":
@@ -29,11 +29,13 @@ while True:
     # Listens to requests.
     command, address = sock.recvfrom(BUFFER_SIZE)
     command = command.decode()
-    print('[SERVER]: Recived %s request from %s' % (command, address))
+    print('\n[SERVER]: Recived %s request from %s' % (command.upper(), address))
     
     if command == "exit":
+        sock.sendto('closing'.encode(), address)
+        print('[SERVER]: Closing...')
         sock.close()
-        exit()
+        break
     else:
         client_handler(sock, address, command)
     
