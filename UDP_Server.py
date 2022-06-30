@@ -6,7 +6,7 @@
 
 import socket as sk
 #import threading
-from Utilities import Client_Fun as cf
+from Utilities import Server_Fun as sf
 
 SERVER_ADDRESS = ('localhost', 10000)
 BUFFER_SIZE = 4096
@@ -17,7 +17,7 @@ print('Server started and listening on IP: %s and PORT: %s\n' % SERVER_ADDRESS)
 
 def client_handler(server_socket, client_addr, cmd, filename):
     if cmd == "list":
-        cf.ListResponse(server_socket, client_addr)
+        sf.ListResponse(server_socket, client_addr)
     
     if cmd == "get":
         print()
