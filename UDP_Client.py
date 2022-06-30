@@ -6,6 +6,7 @@
 
 import socket as sk
 from Utilities import Input_Translator as it
+from Utilities import Client_Fun as cf
 
 SERVER_ADDRESS = ('localhost', 10000)
 BUFFER_SIZE = 4096
@@ -31,7 +32,7 @@ while True:
     
     # Manages commands.
     if command == 'list':
-        listfun()
+        cf.ListRequest(sock, SERVER_ADDRESS)
     
     if command == 'get':
         getfun('a')
