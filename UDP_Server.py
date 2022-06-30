@@ -15,7 +15,7 @@ sock = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
 sock.bind(SERVER_ADDRESS)
 print('Server started and listening on IP: %s and PORT: %s\n' % SERVER_ADDRESS)
 
-def client_handler(server_socket, client_addr, cmd, filename):
+def client_handler(server_socket, client_addr, cmd):
     if cmd == "list":
         sf.ListResponse(server_socket, client_addr)
     
@@ -23,14 +23,13 @@ def client_handler(server_socket, client_addr, cmd, filename):
         print()
         #send_file(server_socket, filename, addr)
     if cmd == "put":
-        print()
-        #update_file(server_socket, filename, addr)
+        sf.PutResponse(server_socket, client_addr)
 
 while True:
     # Listens to requests.
     command, address = sock.recvfrom(BUFFER_SIZE)
+    command = command.decode()
     print('[SERVER]: Recived %s request from %s' % (command, address))
-    command = command.decode('utf-8')
     
     if command == "exit":
         sock.close()

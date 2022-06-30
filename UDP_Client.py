@@ -19,6 +19,7 @@ while True:
     print (' - LIST              |')
     print (' - GET <filename>    |')
     print (' - PUT <filename>    |')
+    """
     text = input('----------------------\nInsert command: ')
     
     # Checks input correctness.
@@ -29,16 +30,21 @@ while True:
         text = input('>>> Insert command: ')
         if it.checkInput(text):
             filename, command = it.getInput(text)
+    """
+    command = 'put'
+    filename = 'Document.docx'
+    text = ''
     
     # Manages commands.
     if command == 'list':
         cf.ListRequest(sock, SERVER_ADDRESS)
     
     if command == 'get':
-        getfun('a')
+        print()
+        #getfun('a')
     
     if command == 'put':
-        putfun('a')
+        cf.PutRequest(sock, SERVER_ADDRESS, filename)
     
     if command == 'exit':
         sock.sendto(text.encode(), SERVER_ADDRESS)
