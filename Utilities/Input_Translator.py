@@ -19,6 +19,9 @@ def getFiles():
 def checkInput(inString):
     fileName = 'empty'
     if len(inString) > 0:
+        if inString.startswith(' '):
+            return False
+        
         # Splits the input string.
         splittedString = inString.split()
         
@@ -35,7 +38,7 @@ def checkInput(inString):
         
         # Checks if the command is valid.
         if not (command == 'put' or command == 'get' or command == 'list'):
-            print('[Invalid command name]')
+            print('[Unknown command]')
             return False
         
         # Checks if the file name is valid.

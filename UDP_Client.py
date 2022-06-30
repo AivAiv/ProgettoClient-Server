@@ -1,34 +1,26 @@
-'''
-                        UDP CLIENT SOCKET
-'''
+#!/usr/bin/python3
+
+"""
+                                CLIENT
+"""
 
 import socket as sk
 from Utilities import Input_Translator as it
 
-# Creates UDP socket
+SERVER_ADDRESS = ('localhost', 10000)
+BUFFER_SIZE = 4096
+
 sock = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
-server_address = ('localhost', 10000)
-
-# LIST function
-def listfun():
-    print ('\nlist command!\n')
-
-# GET function
-def getfun(file):
-    print ('\nget command!\n')
-
-# PUT function
-def putfun(file):
-    print ('\nput command!\n')
+print('Client connected to IP: %s and PORT: %s\n' % SERVER_ADDRESS)
 
 while True:
-    
     print ('----------------------\nCommands list:       |')
     print (' - LIST              |')
     print (' - GET <filename>    |')
     print (' - PUT <filename>    |')
     text = input('----------------------\nInsert command: ')
     
+    # Checks input correctness.
     if it.checkInput(text):
         filename, command = it.getInput(text)
     
@@ -37,15 +29,17 @@ while True:
         if it.checkInput(text):
             filename, command = it.getInput(text)
     
+    # Manages commands.
     if command == 'list':
         listfun()
-    elif command == 'get':
+    
+    if command == 'get':
         getfun('a')
-    elif command == 'put':
+    
+    if command == 'put':
         putfun('a')
-    elif command == 'exit':
-        sock.sendto(text.encode(), server_address)
+    
+    if command == 'exit':
+        sock.sendto(text.encode(), SERVER_ADDRESS)
         sock.close()
         exit()
-    else:
-        print('yay')
