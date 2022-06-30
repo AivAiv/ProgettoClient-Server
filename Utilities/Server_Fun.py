@@ -25,7 +25,7 @@ def ListResponse(sock, client_address):
     print('[SERVER]: Response sent to %s' % client_address)
     
 def PutResponse(sock, client_address):
-    result = True
+    result = 'success'
     filename, address = sock.recvfrom(BUFFER_SIZE)
     filename = filename.decode()
     sentfile = bytearray()
@@ -41,7 +41,7 @@ def PutResponse(sock, client_address):
             f.write(sentfile)
             f.close()      
     except:
-        result = False
+        result = 'error'
     finally:      
         sock.sendto(result.encode(), client_address)
         

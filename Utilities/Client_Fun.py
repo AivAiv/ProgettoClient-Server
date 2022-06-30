@@ -35,7 +35,7 @@ def PutRequest(sock, server_address, filename):
        sock.sendto('done'.encode(), server_address)
        msg, server = sock.recvfrom(BUFFER_SIZE)
        print('Done sending files!')
-       if msg.decode():
+       if msg.decode('utf-8') == 'success':
            print('File transfer was successful on ip:' + server)
        else:
            print('File transfer was not completed due to an error. Ip was:' + server)
