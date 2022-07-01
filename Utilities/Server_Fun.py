@@ -3,25 +3,21 @@
 """
 
 import os
+from Utilities import Input_Translator as it
 
 PATH = './Server_Files'
 BUFFER_SIZE = 4096
 
 # Gets the files from a specified directory
-def getFiles():
+def getServerFiles():
     # If not present creates the directory
     if not os.path.isdir(PATH):
         os.mkdir(PATH)
-    
-    file_list = list()
-    for entry in os.scandir(PATH):
-        if entry.is_file():
-            file_list.append(entry.name)
-    return file_list
+    return it.getFiles(PATH)
 
 def ListResponse(sock, client_address):
     # Sends the response
-    for file in getFiles():
+    for file in getServerFiles():
         sock.sendto(file.encode(), client_address)
     sock.sendto('done'.encode(), client_address)
     print('[SERVER]: Response sent to (%s, %s)' % client_address)
