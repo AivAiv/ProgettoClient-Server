@@ -29,15 +29,29 @@ def PutResponse(sock, client_address):
     filename, address = sock.recvfrom(BUFFER_SIZE)
     filename = filename.decode()
     sentfile = bytearray()
+    localindex = 0
     while True:
+        index, address = sock.recvfrom(BUFFER_SIZE)
+        index = index.decode()
         data, address = sock.recvfrom(BUFFER_SIZE)
         if data == b'done':
-            break
-        else:
+            print('done receiving file')
+            break    
+        elif index == str(localindex):
+            print('packet and index number received correctly ' + index)
             sentfile += data
+            localindex += 1
+            sock.sendto('received'.encode(), client_address)
+        elif index != str(localindex):
+            print('index %s is desynced' + index)
+            print('index was %s' % localindex)
+            sock.sendto('missing'.encode(), client_address)
+            
     print('[SERVER]: Finished reciving data from client (%s, %s)' % address)
     
     try:
+        if not os.path.isdir(PATH):
+            os.mkdir(PATH)
         with open('Server_Files/' + filename, 'wb') as f:
             f.write(sentfile)
             f.close()
@@ -51,7 +65,7 @@ def PutResponse(sock, client_address):
         sock.sendto(result.encode(), client_address)
         print('[SERVER]: Response sent to (%s, %s)' % (client_address))
 
-def GetResponse(sock, server_address):
+def GetResponse(sock, client_address):
         found = False
         filename, address = sock.recvfrom(BUFFER_SIZE)
         filename = filename.decode()
@@ -66,8 +80,8 @@ def GetResponse(sock, server_address):
                         send = f.read(BUFFER_SIZE)
                         if not send:
                             break
-                        sock.sendto(send, server_address)
-                sock.sendto('done'.encode(), server_address)
+                        sock.sendto(send, client_address)
+                sock.sendto('done'.encode(), client_address)
         if not found:  
             print('File ' + filename + ' not found!')
-            sock.sendto('notfound'.encode(), server_address)
+            sock.sendto('notfound'.encode(), client_address)

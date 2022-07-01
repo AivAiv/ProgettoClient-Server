@@ -33,17 +33,37 @@ def PutRequest(sock, server_address, filename):
        sock.sendto('put'.encode(), server_address)
        sock.sendto(filename.encode(), server_address)
        print('[CLIENT]: Sending files...')
+       
+       clientbytes = list()
        with open('Client_Files/' + filename, 'rb') as f:
            while True:
                send = f.read(BUFFER_SIZE)
                if not send:
                    break
+               clientbytes.append(send)
+       
+       index = 0
+       print('Sending list of %s elements' % len(clientbytes))
+       while index < len(clientbytes):
+               send = clientbytes[index]
+               sock.sendto(str(index).encode(), server_address)
+               print('Sent packet no. %s' % index)
                sock.sendto(send, server_address)
+               confirm, address = sock.recvfrom(BUFFER_SIZE)
+               confirm = confirm.decode()
+               if confirm == 'received':
+                   print('Server received packet!')
+                   index += 1
+               
+       sock.sendto('thanks'.encode(), server_address)
        sock.sendto('done'.encode(), server_address)
+       
+       
+       
        
        # Waits for server's response
        msg, server = sock.recvfrom(BUFFER_SIZE)
-       print('[CLIENT]: Server (%s, %s) finished sending files!' % server)
+       print('[CLIENT]: Server (%s, %s) finished sending file!' % server)
        if msg.decode('utf-8') == 'success':
            print('[CLIENT]: File transfer was successful on ip: %s, %s' % server)
        else:

@@ -4,6 +4,7 @@
 import os
 
 PATH = 'Client_Files/'
+SERVERPATH = 'Server_Files/'
 err_file = 0
 
 # Retrieves the files from 'PATH' directory.
@@ -46,19 +47,25 @@ def checkInput(inString):
         
         # Checks if the file name is valid.
         found = False
-        for name in getFiles(PATH):
-            if fileName == name:
-                found = True
+        if(command == 'get'):
+            for name in getFiles(SERVERPATH):
+                if fileName == name:
+                    found = True
+        
+        if(command == 'put'):
+            for name in getFiles(PATH):
+                if fileName == name:
+                    found = True
             
         if command == 'list' or command == 'exit':
             found = True
 
+        if not found:
+             err_file = 1
+             return False        
+         
         return True
-    """    
-            if not found:
-                err_file = 1
-                return False
-    """        
+        
 
 def getInput(inString):
     global err_file

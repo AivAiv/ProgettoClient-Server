@@ -5,7 +5,6 @@
 """
 
 import socket as sk
-#import threading
 from Utilities import Server_Fun as sf
 
 SERVER_ADDRESS = ('localhost', 10000)
@@ -39,7 +38,4 @@ while True:
     else:
         client_handler(sock, address, command)
     
-        
-    #thread = threading.Thread(target=client_handler, args=(server_socket, cmd, addr))
-    #thread.start()
-    #thread.join()
+
