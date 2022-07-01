@@ -51,3 +51,31 @@ def PutRequest(sock, server_address, filename):
             
     except Exception as info:
         print(info)
+
+def GetRequest(sock, server_address, filename):
+     # Sends command and file to the server
+    sock.sendto('get'.encode(), server_address)
+    sock.sendto(filename.encode(), server_address)
+    print('[CLIENT]: Waiting for files...')
+
+    sentfile = bytearray()
+    while True:
+        data, address = sock.recvfrom(BUFFER_SIZE)
+        if data == b'done':
+            break
+        elif data == b'notfound':
+            print('[CLIENT]: File is not present on server')
+            break
+        else:
+            sentfile += data
+    
+    
+    if data == b'done':
+        print('[CLIENT]: Finished reciving data from server (%s, %s)' % address)
+        try:
+            with open('Client_Files/' + filename, 'wb') as f:
+                f.write(sentfile)
+                f.close()
+                print('[CLIENT]: File %s --> saved' % filename)
+        except:
+            print('[CLIENT]: File %s --> NOT saved' % filename)

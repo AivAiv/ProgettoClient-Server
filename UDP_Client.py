@@ -43,8 +43,7 @@ while True:
         cf.ListRequest(sock, SERVER_ADDRESS)
     
     if command == 'get':
-        print()
-        #getfun('a')
+        cf.GetRequest(sock, SERVER_ADDRESS, filename)
     
     if command == 'put':
         cf.PutRequest(sock, SERVER_ADDRESS, filename)

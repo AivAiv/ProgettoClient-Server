@@ -50,3 +50,24 @@ def PutResponse(sock, client_address):
         # Sends the result of the operation
         sock.sendto(result.encode(), client_address)
         print('[SERVER]: Response sent to (%s, %s)' % (client_address))
+
+def GetResponse(sock, server_address):
+        found = False
+        filename, address = sock.recvfrom(BUFFER_SIZE)
+        filename = filename.decode()
+        for file in getServerFiles():
+            if found:
+                break
+            if file == filename:
+                found = True
+                print('File ' + filename + ' found!')
+                with open('Server_Files/' + filename, 'rb') as f:
+                    while True:
+                        send = f.read(BUFFER_SIZE)
+                        if not send:
+                            break
+                        sock.sendto(send, server_address)
+                sock.sendto('done'.encode(), server_address)
+        if not found:  
+            print('File ' + filename + ' not found!')
+            sock.sendto('notfound'.encode(), server_address)

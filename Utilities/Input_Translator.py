@@ -52,12 +52,13 @@ def checkInput(inString):
             
         if command == 'list' or command == 'exit':
             found = True
-        
-        if not found:
-            err_file = 1
-            return False
-        
+
         return True
+    """    
+            if not found:
+                err_file = 1
+                return False
+    """        
 
 def getInput(inString):
     global err_file

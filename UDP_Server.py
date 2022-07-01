@@ -20,8 +20,8 @@ def client_handler(server_socket, client_addr, cmd):
         sf.ListResponse(server_socket, client_addr)
     
     if cmd == "get":
-        print()
-        #send_file(server_socket, filename, addr)
+        sf.GetResponse(server_socket, client_addr)
+        
     if cmd == "put":
         sf.PutResponse(server_socket, client_addr)
 
